@@ -40,7 +40,7 @@ var dataTodos = (state = initialState, action) => {
             localStorage.setItem('dataTodos', JSON.stringify(stateDel));
             return stateDel;
         case Types.UPDATE_TODO:
-            console.log(action);
+            // console.log(action);
             let stateUpdate = [...state];
             stateUpdate = stateUpdate.map(item => {
                 if (item.id === action.todo.id) {
@@ -51,7 +51,7 @@ var dataTodos = (state = initialState, action) => {
                 }
                 else return item;
             })
-            console.log(stateUpdate)
+            // console.log(stateUpdate)
             localStorage.setItem('dataTodos', JSON.stringify(stateUpdate));
 
             return stateUpdate;

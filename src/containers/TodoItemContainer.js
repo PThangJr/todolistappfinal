@@ -37,8 +37,10 @@ class TodoItemContainer extends Component {
     onUpdateTodo = (todo) => {
         // console.log(todo)
         const { handleUpdateTodo, onBack } = this.props;
-        handleUpdateTodo(todo);
-        onBack();
+        if (todo.name.trim() !== '') {
+            handleUpdateTodo(todo);
+            onBack();
+        }
     }
 }
 const mapStateToProps = state => {

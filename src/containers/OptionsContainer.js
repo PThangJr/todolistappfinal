@@ -22,6 +22,7 @@ class OptionsContainer extends Component {
                 onChange={this.onChange}
                 onHandleAdd={this.onHandleAdd}
                 name={name}
+                onReset={this.onReset}
             />
         );
     }
@@ -39,14 +40,18 @@ class OptionsContainer extends Component {
             name: value
         })
     }
+    onReset = () => {
+        console.log('reset')
+        this.setState({
+            name: ''
+        })
+    }
     onHandleAdd = () => {
         const { onHandleAdd } = this.props;
         const { name } = this.state;
         if (name.trim() !== '') {
             onHandleAdd(name);
-            this.setState({
-                name: ''
-            })
+            this.onReset()
         }
         // console.log(this.state);
     }

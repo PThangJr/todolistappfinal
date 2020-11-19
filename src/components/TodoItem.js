@@ -4,7 +4,8 @@ class TodoItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fieldName: ''
+            fieldName: '',
+            height: null,
         }
     }
     componentWillReceiveProps(nextProps) {
@@ -23,18 +24,39 @@ class TodoItem extends Component {
         const { onDeleteTodo } = this.props;
         onDeleteTodo(id);
     }
-    onRepairTodo = (id) => { //Bắt sự kiện sửa 1 item có id trùng vs id truyền vào
+    onRepairTodo = (id, e) => { //Bắt sự kiện sửa 1 item có id trùng vs id truyền vào
         const { onRepairTodo } = this.props;
+        const findTodosItemElem = () => {
+            var target = e.target;
+            while (target.parentElement) {
+                if (target.parentElement.className.indexOf('todos-item') !== -1) {
+                    return target.parentElement;
+                }
+                target = target.parentElement;
+            }
+        }
+        const height = findTodosItemElem().clientHeight + 10;
         onRepairTodo(id);
+        this.setState({
+            height,
+        })
+        // console.log([e.target.parentElement.parentElement.parentElement.parentElement.parentElement.clientHeight])
+        // console.log(height);
     }
     onBack = () => {
         const { onBack } = this.props;
         onBack();
     }
     onInputValue = (e) => { //Lấy dữ liệu ô textarea ra set vào state
-        // console.log(e.target.value);
+        console.log([e.target]);
+        let height = e.target.style.height
+        const scrollHeight = e.target.scrollHeight
+        console.log(height);
+        console.log(scrollHeight);
+        height = 'auto'
         this.setState({
-            fieldName: e.target.value
+            fieldName: e.target.value,
+            height: height > scrollHeight ? height : scrollHeight
         })
     }
     onUpdateTodo = (id) => {
@@ -45,69 +67,104 @@ class TodoItem extends Component {
             name: fieldName,
         });
     }
+    onSubmit = (e) => {
+        e.preventDefault();
+    }
     render() {
+        const { dataTodo, idRepairTodo } = this.props;
+        const { status } = dataTodo;
+        return (
+            <li className={status ? `todos-item mb-10 active-todos` : `todos-item mb-10`}>
+
+                {
+                    this.renderItem()
+                }
+            </li>
+        );
+    }
+    onEnter = (e) => {
+        if (e.charCode === 13) {
+            e.preventDefault();
+        }
+
+    }
+
+    renderItem = () => { // Render ra Item
         const { dataTodo, idRepairTodo } = this.props;
         const { fieldName } = this.state;
         const { id, name, status } = dataTodo;
-        return (
-            <li className={status ? `todos-item mb-10 active-todos` : `todos-item mb-10`}>
-                <div
-                    className="todos__name "
-                    onClick={() => this.toggleStatus(id)}
+        if (idRepairTodo !== id) {
+            return (
+                <div className="todos-item-box">
+                    <div
+                        className="todos__name "
+                        onClick={() => this.toggleStatus(id)}
+                    >
+                        <span className={status ? "icon-check icon--complete " : "icon-check icon--complete d-none"}>
+                            <i className="fas fa-check" />
+                        </span>
+                        <span className={!status ? "icon-check icon--not-complete" : "icon-check icon--not-complete d-none"}>
+                            <i className="fas fa-times" />
+                        </span>
+                        <span className="todos__name-text">
+                            {
+                                name
+                            }
+                        </span>
+                    </div>
+                    <div className="todos__options ">
+                        <span
+                            className={idRepairTodo === id ? "icon-repair d-none" : "icon-repair"}
+                            onClick={(e) => this.onRepairTodo(id, e)}
+                        >
+                            <i className="fas fa-edit" style={{ pointerEvents: false }}
+                                onClick={this.stopPropagation}
+                            />
+                        </span>
+                        <span
+                            className={idRepairTodo === id ? "icon-delete d-none" : "icon-delete "}
+                            onClick={() => this.onDeleteTodo(id)}
+                        >
+                            <i className="fas fa-trash-alt" />
+                        </span>
+                    </div>
+                </div>
+            )
+        }
+        else if (idRepairTodo === id) {
+            return (
+                <form
+                    className="todos-item-box"
+                    onSubmit={this.onSubmit}
                 >
-                    <span className={status ? "icon-check icon--complete " : "icon-check icon--complete d-none"}>
-                        <i className="fas fa-check" />
-                    </span>
-                    <span className={!status ? "icon-check icon--not-complete" : "icon-check icon--not-complete d-none"}>
-                        <i className="fas fa-times" />
-                    </span>
-                    <span className="todos__name-text">
-                        {
-                            name
-                        }
-                    </span>
-                    <input type="text" name="fieldName" className="todos__name-input d-none" />
-                </div>
-                <div className="todos__options ">
-                    <span
-                        className={idRepairTodo === id ? "icon-repair d-none" : "icon-repair"}
-                        onClick={() => this.onRepairTodo(id)}
-                    >
-                        <i className="fas fa-edit" />
-                    </span>
-                    <span
-                        className={idRepairTodo === id ? "icon-delete d-none" : "icon-delete "}
-                        onClick={() => this.onDeleteTodo(id)}
-                    >
-                        <i className="fas fa-trash-alt" />
-                    </span>
-                </div>
-                <div className={idRepairTodo === id ? "todos__name-repair " : "todos__name-repair d-none"}>
-                    <textarea
-                        type="text"
-                        id="text-repair"
-                        className="actions__input"
-                        value={fieldName}
-                        autoFocus
-                        onChange={this.onInputValue}
-                    />
-                </div>
-                <div className={idRepairTodo === id ? "todos__options-repair " : "todos__options-repair  d-none"}>
-                    <span
-                        className="icon-repair"
-                        onClick={() => this.onUpdateTodo(id)}
-                    >
-                        <i className="fas fa-save" />
-                    </span>
-                    <span
-                        className="icon-back"
-                        onClick={() => this.onBack()}
-                    >
-                        <i className="fas fa-undo-alt" />
-                    </span>
-                </div>
-            </li>
-        );
+                    <div className={idRepairTodo === id ? "todos__name-repair " : "todos__name-repair d-none"}>
+                        <textarea
+                            type="text"
+                            id="text-repair"
+                            className="actions__input"
+                            value={fieldName}
+                            onInput={this.onInputValue}
+                            onKeyPress={this.onEnter}
+                            style={{ height: this.state.height + 'px' }}
+                        />
+                    </div>
+                    <div className={idRepairTodo === id ? "todos__options-repair " : "todos__options-repair  d-none"}>
+                        <span
+                            className="icon-repair"
+                            onClick={(e) => this.onUpdateTodo(id)}
+                        >
+                            <i className="fas fa-save" />
+                        </span>
+                        <span
+                            className="icon-back"
+                            onClick={() => this.onBack()}
+                        >
+                            <i className="fas fa-undo-alt" />
+                        </span>
+                    </div>
+                </form>
+            )
+        }
     }
 
 }

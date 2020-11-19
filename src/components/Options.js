@@ -42,8 +42,12 @@ class Options extends Component {
     onSubmit = (e) => {
         e.preventDefault();
     }
+    onReset = () => {
+        console.log('reset')
+    }
+
     render() {
-        const { onHandleAdd, name } = this.props;
+        const { onHandleAdd, name, onReset } = this.props;
         return (
             <div className="setting ">
                 <div className={this.classStatusAction()}>
@@ -53,7 +57,8 @@ class Options extends Component {
                     <div className="setting__body mb-10">
                         <div className="actions__input-box">
                             <input type="text" className="actions__input" placeholder="Tìm kiếm..." />
-                            <span className="icon-reset">
+                            <span className="icon-reset"
+                            >
                                 <i className="fas fa-eraser" />
                             </span>
                         </div>
@@ -128,7 +133,10 @@ class Options extends Component {
                                 onChange={this.onChange}
                                 autoFocus
                             />
-                            <span className="icon-reset">
+                            <span className="icon-reset"
+                                onClick={onReset}
+
+                            >
                                 <i className="fas fa-eraser" />
                             </span>
                         </div>
@@ -147,6 +155,7 @@ class Options extends Component {
                                 <i className="fas fa-cog" />
                             </button>
                         </div>
+
                     </form>
                 </div>
             </div>
