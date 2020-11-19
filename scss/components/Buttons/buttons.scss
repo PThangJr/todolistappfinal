@@ -1,0 +1,28 @@
+.btn {
+    width: 100px;
+    height: 40px;
+    outline: none;
+    border: 1px solid rgba(207, 207, 207, .6);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .1),
+        0 -4px 12px rgba(0, 0, 0, .1);
+
+    :active {
+        animation: animateBtn 1s linear;
+    }
+
+    &--glowing-gradient {
+        background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+        background-size: 400%;
+        animation: animateBtnBg 8s linear infinite;
+    }
+
+    &--setting {
+        width: 50px;
+        background-color: rgba(184, 180, 180, .9);
+        font-size: 1.8rem;
+    }
+}
