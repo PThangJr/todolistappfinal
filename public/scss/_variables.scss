@@ -1,0 +1,10 @@
+$color-white: white;
+$color-grey: rgb(221, 221, 221);
+
+$wh-icon-box: 25px;
+$color-complete: #3fc012;
+$color-not-complete: #f1206a;
+
+@include mobile {
+    $wh-icon-box: 10px;
+}

@@ -1,0 +1,151 @@
+.todos__footer {
+    .progress-bar {
+        @include flex(flex-start);
+        font-size: 1.4rem;
+        font-weight: bold;
+        width: 100%;
+        height: 15px;
+        // border: 1px solid;
+        margin-bottom: 5px;
+
+        &__name {
+            width: 25%;
+            text-align: center;
+        }
+
+        &__percent {
+            width: 65%;
+            height: 100%;
+            border-radius: 40px;
+            border: 2px solid grey;
+            position: relative;
+            overflow: hidden;
+            @include flex(flex-start);
+            outline: none;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, .1),
+                0 5 14px rgba(0, 0, 0, .1);
+
+            .percent {
+                width: 90%;
+                height: 100%;
+                border-radius: 40px;
+                text-align: center;
+                background: linear-gradient(to right, #fbc531, #fa7d09, rgb(250, 37, 37), rgb(255, 30, 0));
+                color: $color-white;
+                font-size: 1.2rem;
+            }
+
+            // ::before {
+            //     content: '';
+            //     position: absolute;
+            //     display: block;
+            //     top: 0;
+            //     left: 0;
+            //     width: 100%;
+            //     height: 50%;
+            //     background: rgba(78, 78, 78, .2);
+            //     z-index: 2;
+            // }
+        }
+
+        &__value {
+            width: 15%;
+            text-align: center;
+            color: $color-white;
+        }
+    }
+
+    .counts {
+        @include flex(space-evenly);
+        font-size: 1.5rem;
+        height: 40px;
+
+        .count {
+            flex: 1;
+            // border: 1px solid;
+            // border-radius: 5px;
+            color: $color-white;
+            height: 100%;
+            position: relative;
+
+
+            &__content {
+                width: 90%;
+                height: 100%;
+                padding: 5px;
+                @include flex(space-evenly);
+                box-shadow: 1px 3px 10px rgba(0, 0, 0, .1);
+                font-weight: bold;
+                position: relative;
+                overflow: hidden;
+
+                @include mobile {
+                    flex-direction: column;
+                }
+
+                .numb {
+                    font-size: 1.7rem;
+                    animation: animateNumb 1s forwards;
+                }
+            }
+
+            .bd {
+                position: absolute;
+                background: rgb(11, 252, 252);
+                background: white;
+
+            }
+
+            .border1 {
+                width: 100%;
+                height: 3px;
+                top: 0;
+                left: -100%;
+                animation: animateBorder1 2s linear infinite;
+            }
+
+            .border2 {
+                width: 3px;
+                height: 100%;
+                top: -100%;
+                right: 0%;
+                animation: animateBorder2 2s linear infinite;
+            }
+
+            .border3 {
+                width: 100%;
+                height: 3px;
+                bottom: 0;
+                right: -100%;
+                animation: animateBorder3 2s linear infinite;
+            }
+
+            .border4 {
+                width: 3px;
+                height: 100%;
+                bottom: -100%;
+                left: 0%;
+                animation: animateBorder4 2s linear infinite;
+            }
+
+            &--total {
+                background: purple;
+                animation: animateCount 1s forwards;
+            }
+
+
+            &--complete {
+                background: $color-complete;
+                animation: animateCount 1s forwards;
+            }
+
+            &--not-complete {
+                background: $color-not-complete;
+                animation: animateCount 1s forwards;
+
+            }
+
+        }
+
+    }
+}

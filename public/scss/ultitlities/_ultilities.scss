@@ -1,0 +1,78 @@
+.show-add {
+    display: block;
+    animation: animateShowAdd 1s forwards;
+}
+
+.show-actions {
+    display: block;
+    animation: animateShowActions 1s forwards;
+}
+
+.hide-add {
+    display: block;
+    animation: animateHideAdd 1s forwards;
+}
+
+.hide-actions {
+    display: block;
+    animation: animateHideActions 1s forwards;
+}
+
+.todos-item.active-todos {
+    background-color: $color-complete;
+
+    .todos__name {}
+
+    .todos__name {
+
+        &-text {
+            font-size: 1.9rem;
+        }
+    }
+
+    .todos__name {
+        font-style: italic;
+
+        &-text {
+            position: relative;
+            color: rgba(218, 218, 218, .7);
+            text-decoration: line-through;
+
+        }
+
+    }
+}
+
+.icon--complete {
+    // background-color: #0bc20b;
+    background-color: $color-white;
+    color: $color-complete;
+}
+
+.icon--not-complete {
+    background-color: $color-white;
+    // background-color: #EA2027;
+    color: #EA2027;
+
+}
+
+.btn--add {
+    background-color: rgb(0, 162, 255);
+}
+
+
+.icon-check {
+
+
+    margin: 0 8px;
+    padding: 0 8px;
+    width: 2.5rem;
+    height: 2.5rem;
+    // color: $color-white;
+    font-size: 1.4rem;
+    border: 2px solid rgb(209, 209, 209);
+    border-radius: 50%;
+    @include flex(center);
+
+
+}
