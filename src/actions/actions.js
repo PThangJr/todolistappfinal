@@ -47,3 +47,9 @@ export const updateTodo = (todo) => {
         todo
     }
 }
+export const search = (name) => {
+    return {
+        type: Types.SEARCH,
+        name
+    }
+}

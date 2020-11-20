@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import Options from './components/Options';
 import CountsContainer from './containers/CountsContainer';
-import OptionsContainer from './containers/OptionsContainer';
 import TodoListContainer from './containers/TodoListContainer';
 
 
@@ -12,7 +12,7 @@ class App extends Component {
           <div className="todos__header">
             <h3 className="todos__header-text">Todo List</h3>
           </div>
-          <OptionsContainer />
+          <Options />
           <TodoListContainer />
           <CountsContainer />
         </div>

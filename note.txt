@@ -1,0 +1,7 @@
+1. Tách Options ra làm 2 component nhỏ => Done!
+    Component Add Todo => Done!
+    Component Actions => Done!
+1. Thêm chức năng tìm kiếm => Done!
+2. Thêm chức năng sắp xếp
+3. Thêm chức năng chọn tất cả
+4. Thêm chức năng xóa tất cả

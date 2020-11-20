@@ -6,4 +6,5 @@ export const TOGGLE_STATUS = 'TOGGLE_STATUS';
 export const DELETE_TODO = 'DELETE_TODO';
 export const REPAIR_TODO = 'REPAIR_TODO';
 export const UPDATE_TODO = 'UPDATE_TODO';
+export const SEARCH = 'SEARCH';
 

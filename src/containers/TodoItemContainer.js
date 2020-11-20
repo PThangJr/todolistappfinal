@@ -5,7 +5,7 @@ import * as actions from '../actions/actions';
 import TodoItem from '../components/TodoItem';
 class TodoItemContainer extends Component {
     render() {
-        const { dataTodo, idRepairTodo } = this.props;
+        const { dataTodo, idRepairTodo, keyword } = this.props;
         return (
             <TodoItem
                 dataTodo={dataTodo}
@@ -46,7 +46,7 @@ class TodoItemContainer extends Component {
 const mapStateToProps = state => {
     return {
         statusAction: state.statusAction,
-        idRepairTodo: state.repairTodo
+        idRepairTodo: state.repairTodo,
     }
 }
 const mapDispatchToProps = (dispatch, props) => {

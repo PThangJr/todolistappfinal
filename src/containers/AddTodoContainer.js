@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import AddTodo from '../components/AddTodo';
 import { connect } from 'react-redux';
-import Options from '../components/Options';
 import * as actions from '../actions/actions';
-class OptionsContainer extends Component {
+class AddTodoContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,37 +11,21 @@ class OptionsContainer extends Component {
     }
 
     render() {
-
         const { statusAction } = this.props;
         const { name } = this.state;
+
         return (
-            <Options
+            <AddTodo
                 statusAction={statusAction}
-                showOptions={this.showOptions}
-                showAdd={this.showAdd}
-                onChange={this.onChange}
+                showAction={this.showAction}
                 onHandleAdd={this.onHandleAdd}
-                name={name}
                 onReset={this.onReset}
+                onChange={this.onChange}
+                name={name}
             />
         );
     }
-    showOptions = () => {
-        const { showOptions } = this.props;
-        showOptions(false);
-    }
-    showAdd = () => {
-        const { showAdd } = this.props;
-        showAdd(true);
-    }
-    onChange = (value) => { // Lấy dữ liệu ô Input thêm công việc
-        // console.log(value);
-        this.setState({
-            name: value
-        })
-    }
     onReset = () => {
-        console.log('reset')
         this.setState({
             name: ''
         })
@@ -55,6 +39,20 @@ class OptionsContainer extends Component {
         }
         // console.log(this.state);
     }
+
+    showAction = () => {
+        const { showAction } = this.props;
+        showAction(false);
+        this.setState({
+            name: ''
+        })
+    }
+    onChange = (value) => { // Lấy dữ liệu ô Input thêm công việc
+        // console.log(value);
+        this.setState({
+            name: value
+        })
+    }
 }
 const mapStateToProps = state => {
     return {
@@ -63,17 +61,11 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        showOptions: (statusAction) => {
+        showAction: (statusAction) => {
             dispatch(actions.changeStatusAction(statusAction));
-        },
-        showAdd: (statusAction) => {
-            dispatch(actions.changeStatusAction(statusAction));
-        },
-        onHandleAdd: (name) => {
-            dispatch(actions.addTodo(name))
         },
 
     }
 }
-// export default OptionsContainer;
-export default connect(mapStateToProps, mapDispatchToProps)(OptionsContainer);
+// export default AddTodoContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(AddTodoContainer);

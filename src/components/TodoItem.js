@@ -72,16 +72,19 @@ class TodoItem extends Component {
         e.preventDefault();
     }
     render() {
-        const { dataTodo, idRepairTodo } = this.props;
+        const { dataTodo } = this.props;
         const { status } = dataTodo;
-        return (
-            <li className={status ? `todos-item mb-10 active-todos` : `todos-item mb-10`}>
+        if (dataTodo) {
 
-                {
-                    this.renderItem()
-                }
-            </li>
-        );
+            return (
+                <li className={status ? `todos-item mb-10 active-todos` : `todos-item mb-10`}>
+
+                    {
+                        this.renderItem()
+                    }
+                </li>
+            );
+        }
     }
     onEnter = (e) => {
         if (e.charCode === 13) {

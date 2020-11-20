@@ -55,6 +55,7 @@ var dataTodos = (state = initialState, action) => {
             localStorage.setItem('dataTodos', JSON.stringify(stateUpdate));
 
             return stateUpdate;
+
         default: return state;
     }
 }
