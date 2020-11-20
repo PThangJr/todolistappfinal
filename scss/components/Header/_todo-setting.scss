@@ -73,6 +73,7 @@
         height: 100%;
         padding: 10px 20px;
         position: absolute;
+        transform: translateX(-100%);
 
         &__input-box {
             flex: 1;

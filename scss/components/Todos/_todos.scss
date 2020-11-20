@@ -24,7 +24,7 @@
     position: relative;
 
     @include mobile {
-        height: 93vh;
+        height: 100vh;
         width: 100%;
         padding: 10px;
         padding-bottom: 20px;
@@ -37,7 +37,9 @@
 
     }
 
-    &__main {}
+    &__main {
+        // height: 80vh;
+    }
 
     &__header {}
 
@@ -50,13 +52,14 @@
     &__body {
         position: relative;
         width: 100%;
-        height: 65%;
+        height: calc(100% - 12% - 160px);
         overflow-y: scroll;
         overflow-x: hidden;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+
         // @include mobile {
-        //     height: 58%;
+        //     height: 60vh;
         // }
 
         // @include tablet-sm {
@@ -81,7 +84,7 @@
     }
 
     &-item {
-        @include flex(space-between);
+        @include flex(flex-start);
         position: relative;
         min-height: 50px;
         background: $color-not-complete;
@@ -91,6 +94,13 @@
             -2px -5px 10px rgba(0, 0, 0, .1),
             inset 0px 0px 10px rgba(0, 0, 0, .1);
         transition: 0.5s;
+
+        &-box {
+            padding: 5px 0;
+            width: 100%;
+            height: 100%;
+            @include flex(flex-start);
+        }
 
         &:hover {
             transform: translateY(-3px) scale(1.05);
@@ -111,7 +121,8 @@
 
     &__name {
         font-size: 2rem;
-        width: 75%;
+        // width: 75%;
+        flex: 4;
         height: 100%;
         cursor: pointer;
         position: relative;
@@ -133,6 +144,7 @@
             overflow: hidden;
             margin-left: 5px;
             animation: animateName 0.8s forwards;
+            word-break: break-all;
             // &:before {
             //     content: '';
             //     display: block;
@@ -154,9 +166,10 @@
 
 
     &__options {
-        width: 25%;
+        // width: 25%;
+        flex: 1;
         height: 100%;
-        @include flex(flex-end);
+        @include flex(center);
         font-size: 2rem;
 
         // color: $color-white;
@@ -165,6 +178,8 @@
             margin-right: 15px;
             cursor: pointer;
             padding: 5px;
+            margin-left: 10px;
+
         }
 
         .icon-delete {
@@ -179,7 +194,7 @@
     .todos__name-repair {
         @include flex(flex-start);
         margin-left: 40px;
-        flex: 1;
+        flex: 4;
 
         #text-repair {
             min-width: 100%;
@@ -188,9 +203,9 @@
             font-size: 2rem;
             overflow: hidden;
             resize: none;
-            margin: 10px 0;
             padding: 5px;
-            background: $color-white;
+            color: $color-white;
+            background: #ff871e;
             outline: none;
             border-radius: 5px;
             border: 2px solid grey;
@@ -199,10 +214,12 @@
     }
 
     .todos__options-repair {
-        width: 25%;
-        @include flex(flex-end);
+        // width: 25%;
+        flex: 1;
+        @include flex(center);
         font-size: 2rem;
         color: $color-white;
+
 
 
         .icon-repair {
@@ -212,7 +229,12 @@
             color: #4fdcff;
 
             @include mobile {
-                margin-right: 5px;
+                // margin-left: 5px;
+            }
+
+            @include mobile {
+                margin-right: 10px;
+                margin-left: 10px;
                 font-size: 2.4rem;
             }
 
@@ -223,6 +245,8 @@
             margin-right: 15px;
             padding: 5px;
             color: rgb(211, 197, 197);
+
+
         }
     }
 }

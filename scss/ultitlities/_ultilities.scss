@@ -1,21 +1,21 @@
 .show-add {
     display: block;
-    animation: animateShowAdd 1s forwards;
+    animation: animateShowAdd .8s forwards;
 }
 
 .show-actions {
     display: block;
-    animation: animateShowActions 1s forwards;
+    animation: animateShowActions .8s forwards;
 }
 
 .hide-add {
     display: block;
-    animation: animateHideAdd 1s forwards;
+    animation: animateHideAdd .8s forwards;
 }
 
 .hide-actions {
     display: block;
-    animation: animateHideActions 1s forwards;
+    animation: animateHideActions .8s forwards;
 }
 
 .todos-item.active-todos {
@@ -23,12 +23,7 @@
 
     .todos__name {}
 
-    .todos__name {
-
-        &-text {
-            font-size: 1.9rem;
-        }
-    }
+    .todos__name {}
 
     .todos__name {
         font-style: italic;

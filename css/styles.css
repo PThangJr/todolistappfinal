@@ -177,24 +177,22 @@ h3 {
 
 .show-add {
   display: block;
-  animation: animateShowAdd 1s forwards; }
+  animation: animateShowAdd .8s forwards; }
 
 .show-actions {
   display: block;
-  animation: animateShowActions 1s forwards; }
+  animation: animateShowActions .8s forwards; }
 
 .hide-add {
   display: block;
-  animation: animateHideAdd 1s forwards; }
+  animation: animateHideAdd .8s forwards; }
 
 .hide-actions {
   display: block;
-  animation: animateHideActions 1s forwards; }
+  animation: animateHideActions .8s forwards; }
 
 .todos-item.active-todos {
   background-color: #3fc012; }
-  .todos-item.active-todos .todos__name-text {
-    font-size: 1.9rem; }
   .todos-item.active-todos .todos__name {
     font-style: italic; }
     .todos-item.active-todos .todos__name-text {
@@ -422,7 +420,7 @@ h3 {
 
 .todos {
   width: 50%;
-  height: 100%;
+  height: 100vh;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(0, 0, 0, 0.1), inset 0 0 5px rgba(0, 0, 0, 0.1);
@@ -431,7 +429,7 @@ h3 {
   position: relative; }
   @media (max-width: 479px) {
     .todos {
-      height: 93vh;
+      height: 100vh;
       width: 100%;
       padding: 10px;
       padding-bottom: 20px; } }
@@ -442,7 +440,7 @@ h3 {
   .todos__body {
     position: relative;
     width: 100%;
-    height: 59vh;
+    height: calc(100% - 12% - 160px);
     overflow-y: scroll;
     overflow-x: hidden;
     border-bottom-left-radius: 10px;
@@ -450,9 +448,6 @@ h3 {
     box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2), inset 0px 0px 5px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     padding: 20px; }
-    @media (max-width: 479px) {
-      .todos__body {
-        height: 57vh; } }
     .todos__body::-webkit-scrollbar {
       display: none; }
   .todos-list {
@@ -472,6 +467,7 @@ h3 {
     box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1), -2px -5px 10px rgba(0, 0, 0, 0.1), inset 0px 0px 10px rgba(0, 0, 0, 0.1);
     transition: 0.5s; }
     .todos-item-box {
+      padding: 5px 0;
       width: 100%;
       height: 100%;
       display: flex;
@@ -487,7 +483,7 @@ h3 {
         transform: none; } }
   .todos__name {
     font-size: 2rem;
-    width: 75%;
+    flex: 4;
     height: 100%;
     cursor: pointer;
     position: relative;
@@ -507,17 +503,18 @@ h3 {
       animation: animateName 0.8s forwards;
       word-break: break-all; }
   .todos__options {
-    width: 25%;
+    flex: 1;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     font-size: 2rem; }
     .todos__options .icon-repair {
       color: #06f8ec;
       margin-right: 15px;
       cursor: pointer;
-      padding: 5px; }
+      padding: 5px;
+      margin-left: 10px; }
     .todos__options .icon-delete {
       color: #bbbbbb;
       margin-right: 15px;
@@ -528,23 +525,23 @@ h3 {
     align-items: center;
     justify-content: flex-start;
     margin-left: 40px;
-    flex: 1; }
+    flex: 4; }
     .todos .todos__name-repair #text-repair {
       min-width: 100%;
       font-size: 2rem;
       overflow: hidden;
       resize: none;
-      margin: 10px 0;
       padding: 5px;
-      background: white;
+      color: white;
+      background: #ff871e;
       outline: none;
       border-radius: 5px;
       border: 2px solid grey; }
   .todos .todos__options-repair {
-    width: 25%;
+    flex: 1;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     font-size: 2rem;
     color: white; }
     .todos .todos__options-repair .icon-repair {
@@ -554,7 +551,8 @@ h3 {
       color: #4fdcff; }
       @media (max-width: 479px) {
         .todos .todos__options-repair .icon-repair {
-          margin-right: 5px;
+          margin-right: 10px;
+          margin-left: 10px;
           font-size: 2.4rem; } }
     .todos .todos__options-repair .icon-back {
       cursor: pointer;
@@ -562,105 +560,109 @@ h3 {
       padding: 5px;
       color: #d3c5c5; }
 
-.todos__footer .progress-bar {
+.todos__footer {
+  height: 8vh;
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: 1.4rem;
-  font-weight: bold;
-  width: 100%;
-  height: 15px;
-  margin-bottom: 5px; }
-  .todos__footer .progress-bar__name {
-    width: 25%;
-    text-align: center; }
-  .todos__footer .progress-bar__percent {
-    width: 65%;
-    height: 100%;
-    border-radius: 40px;
-    border: 2px solid grey;
-    position: relative;
-    overflow: hidden;
+  flex-direction: column;
+  justify-content: center; }
+  .todos__footer .progress-bar {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    outline: none;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1), 0 5 14px rgba(0, 0, 0, 0.1); }
-    .todos__footer .progress-bar__percent .percent {
-      width: 90%;
+    font-size: 1.4rem;
+    font-weight: bold;
+    width: 100%;
+    height: 15px;
+    margin-bottom: 5px; }
+    .todos__footer .progress-bar__name {
+      width: 25%;
+      text-align: center; }
+    .todos__footer .progress-bar__percent {
+      width: 65%;
       height: 100%;
       border-radius: 40px;
-      text-align: center;
-      background: linear-gradient(to right, #fbc531, #fa7d09, #fa2525, #ff1e00);
-      color: white;
-      font-size: 1.2rem; }
-  .todos__footer .progress-bar__value {
-    width: 15%;
-    text-align: center;
-    color: white; }
-
-.todos__footer .counts {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  font-size: 1.5rem;
-  height: 40px; }
-  .todos__footer .counts .count {
-    flex: 1;
-    color: white;
-    height: 100%;
-    position: relative; }
-    .todos__footer .counts .count__content {
-      width: 90%;
-      height: 100%;
-      padding: 5px;
+      border: 2px solid grey;
+      position: relative;
+      overflow: hidden;
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
-      box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.1);
-      font-weight: bold;
-      position: relative;
-      overflow: hidden; }
-      @media (max-width: 479px) {
-        .todos__footer .counts .count__content {
-          flex-direction: column; } }
-      .todos__footer .counts .count__content .numb {
-        font-size: 1.7rem;
-        animation: animateNumb 1s forwards; }
-    .todos__footer .counts .count .bd {
-      position: absolute;
-      background: #0bfcfc;
-      background: white; }
-    .todos__footer .counts .count .border1 {
-      width: 100%;
-      height: 3px;
-      top: 0;
-      left: -100%;
-      animation: animateBorder1 2s linear infinite; }
-    .todos__footer .counts .count .border2 {
-      width: 3px;
+      justify-content: flex-start;
+      outline: none;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1), 0 5 14px rgba(0, 0, 0, 0.1); }
+      .todos__footer .progress-bar__percent .percent {
+        width: 90%;
+        height: 100%;
+        border-radius: 40px;
+        text-align: center;
+        background: linear-gradient(to right, #fbc531, #fa7d09, #fa2525, #ff1e00);
+        color: white;
+        font-size: 1.2rem; }
+    .todos__footer .progress-bar__value {
+      width: 15%;
+      text-align: center;
+      color: white; }
+  .todos__footer .counts {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 1.5rem;
+    height: 40px; }
+    .todos__footer .counts .count {
+      flex: 1;
+      color: white;
       height: 100%;
-      top: -100%;
-      right: 0%;
-      animation: animateBorder2 2s linear infinite; }
-    .todos__footer .counts .count .border3 {
-      width: 100%;
-      height: 3px;
-      bottom: 0;
-      right: -100%;
-      animation: animateBorder3 2s linear infinite; }
-    .todos__footer .counts .count .border4 {
-      width: 3px;
-      height: 100%;
-      bottom: -100%;
-      left: 0%;
-      animation: animateBorder4 2s linear infinite; }
-    .todos__footer .counts .count--total {
-      background: purple;
-      animation: animateCount 1s forwards; }
-    .todos__footer .counts .count--complete {
-      background: #3fc012;
-      animation: animateCount 1s forwards; }
-    .todos__footer .counts .count--not-complete {
-      background: #f1206a;
-      animation: animateCount 1s forwards; }
+      position: relative; }
+      .todos__footer .counts .count__content {
+        width: 90%;
+        height: 100%;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.1);
+        font-weight: bold;
+        position: relative;
+        overflow: hidden; }
+        @media (max-width: 479px) {
+          .todos__footer .counts .count__content {
+            flex-direction: column; } }
+        .todos__footer .counts .count__content .numb {
+          font-size: 1.7rem;
+          animation: animateNumb 1s forwards; }
+      .todos__footer .counts .count .bd {
+        position: absolute;
+        background: #0bfcfc;
+        background: white; }
+      .todos__footer .counts .count .border1 {
+        width: 100%;
+        height: 3px;
+        top: 0;
+        left: -100%;
+        animation: animateBorder1 2s linear infinite; }
+      .todos__footer .counts .count .border2 {
+        width: 3px;
+        height: 100%;
+        top: -100%;
+        right: 0%;
+        animation: animateBorder2 2s linear infinite; }
+      .todos__footer .counts .count .border3 {
+        width: 100%;
+        height: 3px;
+        bottom: 0;
+        right: -100%;
+        animation: animateBorder3 2s linear infinite; }
+      .todos__footer .counts .count .border4 {
+        width: 3px;
+        height: 100%;
+        bottom: -100%;
+        left: 0%;
+        animation: animateBorder4 2s linear infinite; }
+      .todos__footer .counts .count--total {
+        background: purple;
+        animation: animateCount 1s forwards; }
+      .todos__footer .counts .count--complete {
+        background: #3fc012;
+        animation: animateCount 1s forwards; }
+      .todos__footer .counts .count--not-complete {
+        background: #f1206a;
+        animation: animateCount 1s forwards; }
