@@ -1,4 +1,9 @@
 .todos__footer {
+    height: 8vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     .progress-bar {
         @include flex(flex-start);
         font-size: 1.4rem;

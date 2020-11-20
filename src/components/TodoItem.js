@@ -35,7 +35,9 @@ class TodoItem extends Component {
                 target = target.parentElement;
             }
         }
-        const height = findTodosItemElem().clientHeight + 10;
+        const height = findTodosItemElem().clientHeight + 5;
+        // console.log(height)
+        // console.log([findTodosItemElem()])
         onRepairTodo(id);
         this.setState({
             height,
@@ -48,15 +50,14 @@ class TodoItem extends Component {
         onBack();
     }
     onInputValue = (e) => { //Lấy dữ liệu ô textarea ra set vào state
-        console.log([e.target]);
+        // console.log([e.target]);
         let height = e.target.style.height
-        const scrollHeight = e.target.scrollHeight
-        console.log(height);
-        console.log(scrollHeight);
-        height = 'auto'
+        const scrollHeight = e.target.scrollHeight + 3
+        // console.log(height);
+        // console.log(scrollHeight);
         this.setState({
             fieldName: e.target.value,
-            height: height > scrollHeight ? height : scrollHeight
+            height: scrollHeight
         })
     }
     onUpdateTodo = (id) => {
@@ -86,6 +87,14 @@ class TodoItem extends Component {
         if (e.charCode === 13) {
             e.preventDefault();
         }
+        let height = e.target.style.height
+        const scrollHeight = e.target.scrollHeight + 5
+        // console.log(height);
+        // console.log(scrollHeight);
+        this.setState({
+            fieldName: e.target.value,
+            height: scrollHeight
+        })
 
     }
 
@@ -93,6 +102,7 @@ class TodoItem extends Component {
         const { dataTodo, idRepairTodo } = this.props;
         const { fieldName } = this.state;
         const { id, name, status } = dataTodo;
+        // console.log(this.state.height)
         if (idRepairTodo !== id) {
             return (
                 <div className="todos-item-box">
@@ -143,7 +153,7 @@ class TodoItem extends Component {
                             id="text-repair"
                             className="actions__input"
                             value={fieldName}
-                            onInput={this.onInputValue}
+                            onChange={this.onInputValue}
                             onKeyPress={this.onEnter}
                             style={{ height: this.state.height + 'px' }}
                         />
