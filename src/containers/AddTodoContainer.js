@@ -64,6 +64,9 @@ const mapDispatchToProps = (dispatch, props) => {
         showAction: (statusAction) => {
             dispatch(actions.changeStatusAction(statusAction));
         },
+        onHandleAdd: (name) => {
+            dispatch(actions.addTodo(name))
+        }
 
     }
 }

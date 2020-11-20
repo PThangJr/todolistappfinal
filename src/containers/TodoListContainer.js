@@ -3,23 +3,10 @@ import { connect } from 'react-redux';
 import TodoList from '../components/TodoList';
 
 class TodoListContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            dataTodos: []
-        }
-    }
-    componentDidMount() {
-        var { dataTodos } = this.props;
-        this.setState({
-            dataTodos
-        })
-    }
-
 
     render() {
         const { keyword } = this.props;
-        var { dataTodos } = this.state;
+        var { dataTodos } = this.props;
         if (dataTodos.length > 0) {
             if (keyword.trim() !== '') {
                 dataTodos = dataTodos.filter(item => {
