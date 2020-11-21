@@ -5,6 +5,11 @@ $wh-icon-box: 25px;
 $color-complete: #3fc012;
 $color-not-complete: #f1206a;
 
+$height-footer: 55px;
+$height-header: 43px;
+$height-options: 140px;
+$height-body: calc(100% - 55px - 43px - 140px);
+
 @include mobile {
     $wh-icon-box: 10px;
 }
