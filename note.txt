@@ -12,4 +12,6 @@
 
 *. Thêm chức năng xóa tất cả =>     Done!
 
+*. Thêm ô số thứ tự vào các Todo =>     Done!
+
 *. Update thêm modal Alert 

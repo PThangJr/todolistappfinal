@@ -5,10 +5,11 @@ import * as actions from '../actions/actions';
 import TodoItem from '../components/TodoItem';
 class TodoItemContainer extends Component {
     render() {
-        const { dataTodo, idRepairTodo, keyword } = this.props;
+        const { dataTodo, idRepairTodo, stt } = this.props;
         return (
             <TodoItem
                 dataTodo={dataTodo}
+                stt={stt}
                 toggleStatus={this.toggleStatus}
                 onDeleteTodo={this.onDeleteTodo}
                 onRepairTodo={this.onRepairTodo}

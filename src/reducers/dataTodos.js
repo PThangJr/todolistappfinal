@@ -13,6 +13,7 @@ var dataTodos = (state = initialState, action) => {
             // state = false;
             let newState = [...state];
             const newTodo = {
+                stt: newState.length + 1,
                 id: Date.now(),
                 name: action.name,
                 status: false
@@ -39,12 +40,19 @@ var dataTodos = (state = initialState, action) => {
         case Types.DELETE_TODO:
             let stateDel = [...state];
             stateDel = stateDel.filter(item => item.id !== action.id);
+            stateDel = stateDel.map((item, index) => {
+                return {
+                    ...item,
+                    stt: index + 1
+                }
+            })
+
             localStorage.setItem('dataTodos', JSON.stringify(stateDel));
             return [...stateDel];
         case Types.UPDATE_TODO:
             // console.log(action);
             let stateUpdate = [...state];
-            stateUpdate = stateUpdate.map(item => {
+            stateUpdate = stateUpdate.map((item) => {
                 if (item.id === action.todo.id) {
                     return {
                         ...item,

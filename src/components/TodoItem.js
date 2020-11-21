@@ -74,11 +74,11 @@ class TodoItem extends Component {
     render() {
         const { dataTodo } = this.props;
         const { status } = dataTodo;
+
         if (dataTodo) {
 
             return (
                 <li className={status ? `todos-item mb-10 active-todos` : `todos-item mb-10`}>
-
                     {
                         this.renderItem()
                     }
@@ -102,7 +102,7 @@ class TodoItem extends Component {
     }
 
     renderItem = () => { // Render ra Item
-        const { dataTodo, idRepairTodo } = this.props;
+        const { dataTodo, idRepairTodo, stt } = this.props;
         const { fieldName } = this.state;
         const { id, name, status } = dataTodo;
         // console.log(this.state.height)
@@ -120,6 +120,10 @@ class TodoItem extends Component {
                             <i className="fas fa-times" />
                         </span>
                         <span className="todos__name-text">
+                            {
+                                stt
+                            }
+                            <span className="dot">. </span>
                             {
                                 name
                             }

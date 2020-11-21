@@ -24,6 +24,7 @@ class TodoList extends Component {
                 return (
                     <TodoItemContainer
                         key={dataTodo.id}
+                        stt={dataTodo.stt}
                         dataTodo={dataTodo}
                     />
                 )
