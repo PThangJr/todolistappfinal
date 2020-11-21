@@ -7,7 +7,7 @@
     // border-top-left-radius: 10px;
     // border-top-right-radius: 10px;
     border-radius: 10px;
-    height: 140px;
+    height: $height-options;
     overflow: hidden;
     position: relative;
 
@@ -37,6 +37,7 @@
         .btn {
             width: 90%;
             font-size: 1.4rem;
+            overflow: hidden;
             @include flex(space-evenly);
 
             @include mobile {
@@ -48,6 +49,7 @@
                 height: 2rem;
                 margin: 0;
                 font-size: 1rem;
+                animation: animateIconOptions .3s ease-in-out;
             }
 
             &--sort {

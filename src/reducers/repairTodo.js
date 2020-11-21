@@ -1,6 +1,6 @@
 import * as Types from '../constants/ActionTypes';
 var initialState = null;
-var statusAction = (state = initialState, action) => {
+var repairTodo = (state = initialState, action) => {
     switch (action.type) {
         case Types.REPAIR_TODO:
             // console.log(action)
@@ -15,4 +15,4 @@ var statusAction = (state = initialState, action) => {
         default: return state;
     }
 }
-export default statusAction;
+export default repairTodo;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { deleteAll } from '../actions/actions';
 
 class ActionTodo extends Component {
 
@@ -22,10 +23,18 @@ class ActionTodo extends Component {
         const { onSearch } = this.props;
         onSearch(e.target.value);
     }
+    changeIcon = (statusIcon, statusSort) => {
+        if (statusIcon === statusSort) {
+            return '';
+        }
+        else {
+            return ' d-none';
+        }
+    }
 
     render() {
         // console.log(this.props.statusAction)
-        const { keyword, onReset } = this.props;
+        const { keyword, onReset, onSort, statusSort, onSelectAll, onDeleteAll } = this.props;
         return (
             <div className={this.classStatusAction()}>
                 <h3 className="setting__header">
@@ -59,23 +68,32 @@ class ActionTodo extends Component {
                 </div>
                 <ul className="setting__menu">
                     <li className="setting__menu-item">
-                        <button className="btn btn--sort">
-                            <span className="btn-text">
+                        <button
+                            className="btn btn--sort"
+                            onClick={onSort}
+                        >
+                            <span
+                                className="btn-text"
+                            >
                                 Sắp xếp
           </span>
-                            <span className=" icon-sort d-none">
+                            <span className={"icon-check icon-sort " + this.changeIcon(-1, statusSort)}>
                                 <i className="fas fa-sort" />
                             </span>
-                            <span className="icon-check icon-sort icon--complete ">
-                                <i className="fas fa-check" />
-                            </span>
-                            <span className="icon-check icon-sort icon--not-complete d-none">
+
+                            <span className={"icon-check icon-sort icon--not-complete " + this.changeIcon(0, statusSort)}>
                                 <i className="fas fa-times" />
+                            </span>
+                            <span className={"icon-check icon-sort icon--complete " + this.changeIcon(1, statusSort)}>
+                                <i className="fas fa-check" />
                             </span>
                         </button>
                     </li>
                     <li className="setting__menu-item">
-                        <button className="btn btn--mark-complete">
+                        <button
+                            className="btn btn--mark-complete"
+                            onClick={() => onSelectAll(true)}
+                        >
                             <div className="btn-text">
                                 Chọn tất cả
           </div>
@@ -85,15 +103,21 @@ class ActionTodo extends Component {
                         </button>
                     </li>
                     <li className="setting__menu-item">
-                        <button className="btn btn--mark-not-complete">
+                        <button
+                            className="btn btn--mark-not-complete"
+                            onClick={() => onSelectAll(false)}
+                        >
                             Chọn tất cả
-          <span className="icon-check icon-mark icon--not-complete">
+                        <span className="icon-check icon-mark icon--not-complete">
                                 <i className="fas fa-times" />
                             </span>
                         </button>
                     </li>
                     <li className="setting__menu-item">
-                        <button className="btn btn--delete-all">
+                        <button
+                            className="btn btn--delete-all"
+                            onClick={() => onDeleteAll()}
+                        >
                             Xóa tất cả
           <span className="icon-check icon-delete-all">
                                 <i className="fas fa-trash" />

@@ -5,7 +5,7 @@ import * as actions from '../actions/actions';
 class ActionTodoContainer extends Component {
 
     render() {
-        const { statusAction, keyword } = this.props;
+        const { statusAction, keyword, statusSort } = this.props;
 
         return (
             <ActionTodo
@@ -14,13 +14,19 @@ class ActionTodoContainer extends Component {
                 onSearch={this.onSearch}
                 keyword={keyword}
                 onReset={this.onReset}
+                onSort={this.onSort}
+                statusSort={statusSort}
+                onSelectAll={this.onSelectAll}
+                onDeleteAll={this.onDeleteAll}
             />
         );
     }
     showAdd = () => { //Show Add Todo Component
         const { showAdd, onHandleReset } = this.props;
         showAdd(true);
-        onHandleReset()
+        onHandleReset();
+        const { onHandleResetSort } = this.props;
+        onHandleResetSort();
     }
     onSearch = (value) => {
         const { onHandleSearch } = this.props;
@@ -30,12 +36,27 @@ class ActionTodoContainer extends Component {
         const { onHandleReset } = this.props;
         onHandleReset()
     }
+    onSort = () => {
+        const { onHandleSort } = this.props;
+        onHandleSort()
+    }
+    onSelectAll = (statusSelect) => {
+        const { onHandleSelectAll } = this.props;
+        onHandleSelectAll(statusSelect)
+    }
+    onDeleteAll = () => {
+        const { onHandleDeleteAll } = this.props;
+        onHandleDeleteAll()
+    }
 }
 
 const mapStateToProps = state => {
     return {
         statusAction: state.statusAction,
-        keyword: state.search
+        keyword: state.search,
+        statusSort: state.sortTodo,
+        dataTodos: state.dataTodos,
+        statusSelect: state.selectAll
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
@@ -48,6 +69,18 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onHandleReset: () => {
             dispatch(actions.search(''))
+        },
+        onHandleSort: () => {
+            dispatch(actions.sortTodo());
+        },
+        onHandleResetSort: () => {
+            dispatch(actions.sortTodo(-1))
+        },
+        onHandleSelectAll: (statusSelect) => {
+            dispatch(actions.selectAll(statusSelect))
+        },
+        onHandleDeleteAll: () => {
+            dispatch(actions.deleteAll())
         }
 
     }

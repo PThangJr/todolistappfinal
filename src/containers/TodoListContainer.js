@@ -4,15 +4,36 @@ import TodoList from '../components/TodoList';
 
 class TodoListContainer extends Component {
 
+
+
     render() {
-        const { keyword } = this.props;
-        var { dataTodos } = this.props;
-        if (dataTodos.length > 0) {
-            if (keyword.trim() !== '') {
+        const { keyword, statusSort } = this.props;
+        let { dataTodos } = this.props;
+        const dataTodosInit = [...dataTodos]
+
+        if (dataTodos) {
+            if (keyword.trim() !== '') { // Tìm kiếm 
                 dataTodos = dataTodos.filter(item => {
                     return item.name.trim().toLowerCase().indexOf(keyword.trim().toLowerCase()) !== -1;
                 })
             }
+
+            if (statusSort === -1) {
+
+            }
+            if (statusSort === 0) {
+                dataTodos = dataTodosInit.sort((a, b) => {
+                    return a.status === b.status ? 0 : a.status ? 1 : -1;
+                })
+            }
+            if (statusSort === 1) {
+                dataTodos = dataTodosInit.sort((a, b) => {
+                    return a.status === b.status ? 0 : a.status ? -1 : 1;
+                })
+            }
+
+
+
         }
         return (
             <TodoList
@@ -26,7 +47,8 @@ class TodoListContainer extends Component {
 const mapStateToProps = state => {
     return {
         dataTodos: state.dataTodos,
-        keyword: state.search
+        keyword: state.search,
+        statusSort: state.sortTodo
     }
 }
 // export default TodoItemContainer;

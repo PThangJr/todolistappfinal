@@ -52,7 +52,7 @@
     &__body {
         position: relative;
         width: 100%;
-        height: calc(100% - 12% - 160px);
+        height: $height-body;
         overflow-y: scroll;
         overflow-x: hidden;
         border-bottom-left-radius: 10px;

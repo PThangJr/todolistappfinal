@@ -53,3 +53,23 @@ export const search = (name) => {
         name
     }
 }
+
+export const sortTodo = (statusSort) => {
+    return {
+        type: Types.SORT,
+        statusSort
+    }
+}
+export const selectAll = (statusSelect) => {
+    return {
+        type: Types.SELECT_ALL,
+        statusSelect
+    }
+}
+export const deleteAll = () => {
+    return {
+        type: Types.DELETE_ALL,
+
+    }
+}
+

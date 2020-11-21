@@ -5,8 +5,9 @@ var initialState = dataLocal || [];
 var dataTodos = (state = initialState, action) => {
     switch (action.type) {
         case Types.DATA_TODOS:
+            console.log(dataTodos);
 
-            return [...state];
+            return state;
         case Types.ADD_TODO: //Thêm 1 công việc vào mảng
             // console.log(action)
             // state = false;
@@ -18,7 +19,7 @@ var dataTodos = (state = initialState, action) => {
             }
             newState.push(newTodo);
             localStorage.setItem('dataTodos', JSON.stringify(newState));
-            return newState;
+            return [...newState];
         case Types.TOGGLE_STATUS:
             let stateToggleStatus = [...state];
             stateToggleStatus = stateToggleStatus.map(item => {
@@ -32,13 +33,14 @@ var dataTodos = (state = initialState, action) => {
                     return item;
                 }
             })
+            // console.log(stateToggleStatus)
             localStorage.setItem('dataTodos', JSON.stringify(stateToggleStatus));
             return stateToggleStatus;
         case Types.DELETE_TODO:
             let stateDel = [...state];
             stateDel = stateDel.filter(item => item.id !== action.id);
             localStorage.setItem('dataTodos', JSON.stringify(stateDel));
-            return stateDel;
+            return [...stateDel];
         case Types.UPDATE_TODO:
             // console.log(action);
             let stateUpdate = [...state];
@@ -54,9 +56,33 @@ var dataTodos = (state = initialState, action) => {
             // console.log(stateUpdate)
             localStorage.setItem('dataTodos', JSON.stringify(stateUpdate));
 
-            return stateUpdate;
-
-        default: return state;
+            return [...stateUpdate];
+        case Types.SELECT_ALL:
+            var stateSelectAll = [...state];
+            if (action.statusSelect) {
+                stateSelectAll = stateSelectAll.map(item => {
+                    return {
+                        ...item,
+                        status: action.statusSelect
+                    }
+                })
+            }
+            else {
+                stateSelectAll = stateSelectAll.map(item => {
+                    return {
+                        ...item,
+                        status: false
+                    }
+                })
+            }
+            localStorage.setItem('dataTodos', JSON.stringify(stateSelectAll));
+            return stateSelectAll;
+        case Types.DELETE_ALL:
+            const stateDelete = [];
+            localStorage.setItem('dataTodos', JSON.stringify(stateDelete))
+            return [];
+        default: return [...state];
     }
+    return state;
 }
 export default dataTodos;
