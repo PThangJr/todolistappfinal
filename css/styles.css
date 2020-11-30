@@ -547,7 +547,8 @@ h3 {
       background: #ff871e;
       outline: none;
       border-radius: 5px;
-      border: 2px solid grey; }
+      border: 2px solid grey;
+      word-break: break-all; }
   .todos .todos__options-repair {
     flex: 1;
     display: flex;
