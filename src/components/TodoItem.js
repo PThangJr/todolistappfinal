@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
+import UpdateItem from './UpdateItem';
 
 class TodoItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fieldName: '',
             height: null,
         }
     }
-    componentWillReceiveProps(nextProps) {
-        const { dataTodo } = nextProps;
-        if (dataTodo) {
-            this.setState({
-                fieldName: dataTodo.name
-            })
-        }
-    }
+
+
     toggleStatus = (id) => { //Bắt sự kiện click vào 1 Item để thay đổi trạng thái
         const { toggleStatus } = this.props;
         toggleStatus(id);
@@ -26,51 +20,13 @@ class TodoItem extends Component {
     }
     onRepairTodo = (id, e) => { //Bắt sự kiện sửa 1 item có id trùng vs id truyền vào
         const { onRepairTodo } = this.props;
-        const findTodosItemElem = () => {
-            var target = e.target;
-            while (target.parentElement) {
-                if (target.parentElement.className.indexOf('todos-item') !== -1) {
-                    return target.parentElement;
-                }
-                target = target.parentElement;
-            }
-        }
-        const height = findTodosItemElem().clientHeight + 5;
-        // console.log(height)
-        // console.log([findTodosItemElem()])
-        onRepairTodo(id);
+        const height = e.target.parentElement.parentElement.parentElement.offsetHeight;
         this.setState({
             height,
         })
-        // console.log([e.target.parentElement.parentElement.parentElement.parentElement.parentElement.clientHeight])
-        // console.log(height);
+        onRepairTodo(id);
     }
-    onBack = () => {
-        const { onBack } = this.props;
-        onBack();
-    }
-    onInputValue = (e) => { //Lấy dữ liệu ô textarea ra set vào state
-        // console.log([e.target]);
-        let height = e.target.style.height
-        const scrollHeight = e.target.scrollHeight + 3
-        // console.log(height);
-        // console.log(scrollHeight);
-        this.setState({
-            fieldName: e.target.value,
-            height: scrollHeight
-        })
-    }
-    onUpdateTodo = (id) => {
-        const { onUpdateTodo } = this.props;
-        const { fieldName } = this.state;
-        onUpdateTodo({
-            id,
-            name: fieldName,
-        });
-    }
-    onSubmit = (e) => {
-        e.preventDefault();
-    }
+
     render() {
         const { dataTodo } = this.props;
         const { status } = dataTodo;
@@ -86,25 +42,15 @@ class TodoItem extends Component {
             );
         }
     }
-    onEnter = (e) => {
-        if (e.charCode === 13) {
-            e.preventDefault();
-        }
-        let height = e.target.style.height
-        const scrollHeight = e.target.scrollHeight + 5
-        // console.log(height);
-        // console.log(scrollHeight);
-        this.setState({
-            fieldName: e.target.value,
-            height: scrollHeight
-        })
-
+    onLoad = (e) => {
+        console.log(e)
+        console.log('load')
     }
 
     renderItem = () => { // Render ra Item
-        const { dataTodo, idRepairTodo, stt } = this.props;
-        const { fieldName } = this.state;
+        const { dataTodo, idRepairTodo, stt, onUpdateTodo, onBack } = this.props;
         const { id, name, status } = dataTodo;
+        const { height } = this.state;
         // console.log(this.state.height)
         if (idRepairTodo !== id) {
             return (
@@ -120,10 +66,10 @@ class TodoItem extends Component {
                             <i className="fas fa-times" />
                         </span>
                         <span className="todos__name-text">
-                            {
+                            {/* {
                                 stt
                             }
-                            <span className="dot">. </span>
+                            <span className="dot">. </span> */}
                             {
                                 name
                             }
@@ -150,36 +96,13 @@ class TodoItem extends Component {
         }
         else if (idRepairTodo === id) {
             return (
-                <form
-                    className="todos-item-box"
-                    onSubmit={this.onSubmit}
-                >
-                    <div className={idRepairTodo === id ? "todos__name-repair " : "todos__name-repair d-none"}>
-                        <textarea
-                            type="text"
-                            id="text-repair"
-                            className="actions__input"
-                            value={fieldName}
-                            onChange={this.onInputValue}
-                            onKeyPress={this.onEnter}
-                            style={{ height: this.state.height + 'px' }}
-                        />
-                    </div>
-                    <div className={idRepairTodo === id ? "todos__options-repair " : "todos__options-repair  d-none"}>
-                        <span
-                            className="icon-repair"
-                            onClick={(e) => this.onUpdateTodo(id)}
-                        >
-                            <i className="fas fa-save" />
-                        </span>
-                        <span
-                            className="icon-back"
-                            onClick={() => this.onBack()}
-                        >
-                            <i className="fas fa-undo-alt" />
-                        </span>
-                    </div>
-                </form>
+                <UpdateItem
+                    idRepairTodo={idRepairTodo}
+                    dataTodo={dataTodo}
+                    onUpdateTodo={onUpdateTodo}
+                    onBack={onBack}
+                    defaultHeight={height}
+                />
             )
         }
     }

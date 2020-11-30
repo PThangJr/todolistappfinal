@@ -25,8 +25,7 @@ class ActionTodoContainer extends Component {
         const { showAdd, onHandleReset } = this.props;
         showAdd(true);
         onHandleReset();
-        const { onHandleResetSort } = this.props;
-        onHandleResetSort();
+
     }
     onSearch = (value) => {
         const { onHandleSearch } = this.props;

@@ -36,6 +36,8 @@ class AddTodoContainer extends Component {
         if (name.trim() !== '') {
             onHandleAdd(name);
             this.onReset()
+            const { onHandleResetSort } = this.props;
+            onHandleResetSort();
         }
         // console.log(this.state);
     }
@@ -66,7 +68,10 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onHandleAdd: (name) => {
             dispatch(actions.addTodo(name))
-        }
+        },
+        onHandleResetSort: () => {
+            dispatch(actions.sortTodo(-1))
+        },
 
     }
 }
